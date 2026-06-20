@@ -8,7 +8,7 @@ dependencies = [
   "copilotkit==0.1.94",
   "langchain==1.2.15",
   "langchain-openai==1.1.9",
-  "langchain-anthropic==1.4.1",
+  "langchain-anthropic==1.4.6",
   "langgraph==1.1.6",
   "langsmith==0.7.33",
   "openai==1.109.1",

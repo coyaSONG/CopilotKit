@@ -1,5 +1,5 @@
 version = 1
-revision = 2
+revision = 3
 requires-python = ">=3.12"
 
 [[package]]
@@ -16,7 +16,7 @@ wheels = [
 
 [[package]]
 name = "agno"
-version = "2.3.3"
+version = "2.6.6"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "docstring-parser" },
@@ -33,9 +33,9 @@ dependencies = [
     { name = "typer" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/2c/53/b6c5e07a3e2ef7120d5907e534851e613b9205469238d941abffd2ef2b2c/agno-2.3.3.tar.gz", hash = "sha256:f29eb2f4af69f3ae86d6558821a6761d0efa1e0e14c6b7f1fd4307fdd4eac8a1", size = 1127496, upload-time = "2025-11-27T12:17:49.932Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/fa/b7/17c737b7a482b204eeb287e2c1616ed4abea93d71501810c37f269d002fb/agno-2.6.6.tar.gz", hash = "sha256:c8767ff7528a4f8b7aa8c0543592c3b9cc3c2e3f5a2852555a1c493408df3acf", size = 2025094, upload-time = "2026-05-14T07:35:01.598Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/01/8f/91ab8a34ea07dabe67cd8a867d89e8d0c043dcd82c3bfc75efbd0454c5fa/agno-2.3.3-py3-none-any.whl", hash = "sha256:1eb6f457dd55872af40c52a3a876731ba7d84ea8f63aa23579a9a55ef04cb658", size = 1383698, upload-time = "2025-11-27T12:17:47.525Z" },
+    { url = "https://files.pythonhosted.org/packages/fa/d1/1a9078840c00cd2b6a2968dd11cc107c72290424ff7dbd4baf9a87617ac3/agno-2.6.6-py3-none-any.whl", hash = "sha256:ba8795e020d2a036af312734c1a796b5064466d4c45ab6d64ea51ec5ec2b2cd7", size = 2405077, upload-time = "2026-05-14T07:34:59.063Z" },
 ]
 
 [[package]]
@@ -414,7 +414,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "ag-ui-protocol", specifier = ">=0.1.8" },
-    { name = "agno", specifier = ">=1.7.8" },
+    { name = "agno", specifier = ">=2.6.6" },
     { name = "fastapi", specifier = ">=0.115.13" },
     { name = "openai", specifier = ">=1.88.0" },
     { name = "packaging", specifier = ">=25.0.0" },

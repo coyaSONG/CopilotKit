@@ -246,6 +246,11 @@ jobs:
       - name: Install uv
         if: steps.should-run.outputs.skip != 'true' && matrix.needs_python
         uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
+        with:
+          # Dojo leaves a uv-backed server alive until job teardown. Disable
+          # setup-uv's post-job cache prune so it cannot deadlock on that
+          # process; the restore-only cache above still accelerates installs.
+          enable-cache: false
 
       - name: Install cpk dependencies
         if: steps.should-run.outputs.skip != 'true'

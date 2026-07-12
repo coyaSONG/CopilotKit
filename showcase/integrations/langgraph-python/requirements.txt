@@ -4,7 +4,7 @@ ag-ui-protocol==0.1.18
 # demo to run the validate->retry recovery loop in-graph. Same pin as
 # langgraph-fastapi.
 ag-ui-langgraph==0.0.41
-langchain==1.2.15
+langchain==1.3.9
 langchain-openai==1.1.9
 langchain-anthropic==1.4.6
 langgraph==1.1.6

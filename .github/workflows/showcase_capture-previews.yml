@@ -42,6 +42,7 @@ jobs:
     # which could re-trigger via push or the completed-deploy workflow_run.
     # Skip when the triggering commit came from this workflow itself.
     if: >-
+      github.repository == 'CopilotKit/CopilotKit' &&
       (github.event_name != 'workflow_run' ||
        !startsWith(github.event.workflow_run.head_commit.message, 'Update preview URLs in registry')) &&
       (github.event_name != 'push' ||

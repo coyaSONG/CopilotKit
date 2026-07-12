@@ -23,7 +23,7 @@ permissions:
 
 jobs:
   validate-model-names:
-    runs-on: depot-ubuntu-24.04-4
+    runs-on: ${{ github.repository == 'CopilotKit/CopilotKit' && 'depot-ubuntu-24.04-4' || 'ubuntu-latest' }}
     timeout-minutes: 15
     permissions:
       contents: read
@@ -42,7 +42,7 @@ jobs:
       - run: pnpm tsx scripts/validate-doc-model-names.ts
 
   doc-tests:
-    runs-on: depot-ubuntu-24.04-4
+    runs-on: ${{ github.repository == 'CopilotKit/CopilotKit' && 'depot-ubuntu-24.04-4' || 'ubuntu-latest' }}
     timeout-minutes: 15
     needs: validate-model-names
     permissions:

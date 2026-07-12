@@ -336,13 +336,14 @@ jobs:
         with:
           node-version: 22.x
       - name: Verify Railway image refs
+        if: env.RAILWAY_TOKEN != ''
         env:
           RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
         run: npx tsx showcase/scripts/verify-railway-image-refs.ts
 
   build:
     needs: [detect-changes, check-lockfile, verify-image-refs]
-    if: needs.detect-changes.outputs.has_changes == 'true'
+    if: ${{ github.repository == 'CopilotKit/CopilotKit' && needs.detect-changes.outputs.has_changes == 'true' }}
     runs-on: depot-ubuntu-24.04-4
     timeout-minutes: ${{ fromJSON(matrix.service.timeout) }}
     permissions:
@@ -625,7 +626,7 @@ jobs:
 
   build-starters:
     needs: [detect-starter-changes]
-    if: needs.detect-starter-changes.outputs.has_changes == 'true'
+    if: ${{ github.repository == 'CopilotKit/CopilotKit' && needs.detect-starter-changes.outputs.has_changes == 'true' }}
     runs-on: depot-ubuntu-24.04-4
     timeout-minutes: 20
     permissions:
@@ -671,7 +672,7 @@ jobs:
   aggregate-build-results:
     name: Aggregate build results
     needs: [detect-changes, build]
-    if: ${{ !cancelled() && needs.detect-changes.outputs.has_changes == 'true' }}
+    if: ${{ !cancelled() && needs.detect-changes.outputs.has_changes == 'true' && needs.build.result != 'skipped' }}
     runs-on: ubuntu-latest
     timeout-minutes: 3
     permissions:

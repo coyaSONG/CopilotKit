@@ -44,7 +44,10 @@ jobs:
     # Depot (Startup plan, unlimited minutes) for persistent pnpm/npm
     # cache across runs — cold ubuntu-latest runs were ~18-20m; Depot
     # typically reduces to ~5-8m. 25m timeout retained as headroom.
-    runs-on: depot-ubuntu-24.04-4
+    # Forks do not have access to CopilotKit's Depot organization. Preserve
+    # Depot caching upstream while keeping fork CI runnable on GitHub-hosted
+    # infrastructure.
+    runs-on: ${{ github.repository == 'CopilotKit/CopilotKit' && 'depot-ubuntu-24.04-4' || 'ubuntu-latest' }}
     timeout-minutes: 25
     outputs:
       inline_slack_notifier_reached: ${{ steps.inline_slack_marker.outputs.reached }}

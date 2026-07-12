@@ -346,16 +346,30 @@ jobs:
             echo "HEAD is a merge commit ($parents parents) — skipping commitlint."
             exit 0
           fi
-          npx commitlint --last --verbose
 
-      - name: Validate PR commits with commitlint
+          subject=$(git log -1 --pretty=%s)
+          if [[ "$subject" =~ \(#[0-9]+\)$ ]]; then
+            echo "HEAD was generated from a PR whose title and commits were already checked — skipping commitlint."
+            exit 0
+          fi
+
+          # Direct pushes still need validation. Lint only the subject so a
+          # markdown commit body cannot be parsed as additional messages.
+          printf '%s\n' "$subject" | npx commitlint --verbose
+
+      - name: Validate PR title and commits with commitlint
         id: commitlint
         if: github.event_name == 'pull_request'
         continue-on-error: true
         env:
           PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
           PR_HEAD_SHA: ${{ github.event.pull_request.head.sha }}
-        run: npx commitlint --from "${PR_BASE_SHA}" --to "${PR_HEAD_SHA}" --verbose 2>&1 | tee /tmp/commitlint-output.txt
+          PR_TITLE: ${{ github.event.pull_request.title }}
+        run: |
+          {
+            printf '%s\n' "$PR_TITLE" | npx commitlint --verbose
+            npx commitlint --from "${PR_BASE_SHA}" --to "${PR_HEAD_SHA}" --verbose
+          } 2>&1 | tee /tmp/commitlint-output.txt
 
       - name: Post fix suggestion on failure
         if: github.event_name == 'pull_request' && steps.commitlint.outcome == 'failure'

@@ -248,7 +248,7 @@ jobs:
   eval:
     needs: [gate, dispatch-gate]
     if: always() && (needs.gate.result == 'success' || needs.dispatch-gate.result == 'success')
-    runs-on: depot-ubuntu-24.04-16
+    runs-on: ${{ github.repository == 'CopilotKit/CopilotKit' && 'depot-ubuntu-24.04-16' || 'ubuntu-latest' }}
     timeout-minutes: 45
 
     permissions:

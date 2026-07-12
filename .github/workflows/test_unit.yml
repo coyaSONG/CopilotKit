@@ -41,7 +41,7 @@ concurrency:
 jobs:
   unit:
     name: "unit"
-    runs-on: depot-ubuntu-24.04-4
+    runs-on: ${{ github.repository == 'CopilotKit/CopilotKit' && 'depot-ubuntu-24.04-4' || 'ubuntu-latest' }}
     timeout-minutes: 15
     strategy:
       fail-fast: false

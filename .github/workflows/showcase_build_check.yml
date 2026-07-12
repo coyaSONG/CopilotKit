@@ -180,7 +180,9 @@ jobs:
 
   build-check:
     needs: [detect-changes]
-    if: needs.detect-changes.outputs.has_changes == 'true'
+    # Docker image checks require CopilotKit's Depot organization. Forks still
+    # run detect-changes and the regular build/type/test workflows.
+    if: ${{ github.repository == 'CopilotKit/CopilotKit' && needs.detect-changes.outputs.has_changes == 'true' }}
     runs-on: depot-ubuntu-24.04-4
     timeout-minutes: ${{ fromJSON(matrix.service.timeout) }}
     permissions:
